@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="ice" size="2.000000 2.000000" />
+    <ImageTarget name="wrench" size="2.000000 2.000000" />
+    <ImageTarget name="fire" size="2.000000 2.000000" />
+    <ImageTarget name="turret" size="2.000000 2.000000" />
+    <ImageTarget name="tower" size="2.000000 2.000000" />
+  </Tracking>
+</QCARConfig>
