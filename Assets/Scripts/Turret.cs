@@ -57,7 +57,7 @@ public class Turret : MonoBehaviour
 
             Bullet currentBullet = Instantiate(bullet, shootPoint.position, Quaternion.identity).GetComponent<Bullet>();
             currentBullet.transform.forward = directionToEnemy.normalized;
-            currentBullet.GetComponent<Rigidbody>().AddForce(transform.forward * bulletForce, ForceMode.Impulse);
+            currentBullet.GetComponent<Rigidbody>().AddForce(directionToEnemy.normalized * bulletForce, ForceMode.Impulse);
             currentBullet.lifeTime = bulletLifeTime;
             currentBullet.damage = bulletDamage;
 

@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<EnemyTest>() != null)
         {
-            Debug.Log($"Dealt {damage} points of damage");
+            Debug.Log($"Dealt {damage} points of damage via BULLET");
             Destroy(gameObject);
         }
     }
