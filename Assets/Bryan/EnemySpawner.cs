@@ -24,10 +24,21 @@ public class EnemySpawner : MonoBehaviour
     public float timeBetweenWaves = 5f;
 
     private int currentWave = 0;
+    private bool isSpawning = false;
 
-    void Start()
+    public void ActivateSpawner()
     {
-        StartCoroutine(SpawnWaves());
+        if (!isSpawning)
+        {
+            isSpawning = true;
+            StartCoroutine(SpawnWaves());
+        }
+    }
+
+    public void DeactivateSpawner()
+    {
+        StopAllCoroutines();
+        isSpawning = false;
     }
 
     IEnumerator SpawnWaves()
@@ -36,7 +47,6 @@ public class EnemySpawner : MonoBehaviour
         {
             EnemyWave wave = waves[currentWave];
 
-            // Generar una lista con todos los prefabs de esta oleada
             List<GameObject> enemiesToSpawn = new List<GameObject>();
             foreach (EnemyGroup group in wave.enemyGroups)
             {
@@ -46,10 +56,8 @@ public class EnemySpawner : MonoBehaviour
                 }
             }
 
-            // Mezclar la lista aleatoriamente
             Shuffle(enemiesToSpawn);
 
-            // Spawnear los enemigos en el orden mezclado
             foreach (GameObject prefab in enemiesToSpawn)
             {
                 SpawnEnemy(prefab);
@@ -64,7 +72,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        Debug.Log("¡Todas las oleadas completadas!");
+        Debug.Log("Â¡Todas las oleadas completadas!");
     }
 
     void SpawnEnemy(GameObject enemyPrefab)
@@ -78,7 +86,6 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    // Algoritmo de Fisher-Yates para mezclar una lista
     void Shuffle(List<GameObject> list)
     {
         for (int i = 0; i < list.Count; i++)
