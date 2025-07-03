@@ -4,7 +4,7 @@ public class TurretSpawner : MonoBehaviour
 {
     public TurretPlacerUI turretPlacerUI;
     public LayerMask targetLayer;
-    public GameObject spawnedTurret;
+    public TurretClass spawnedTurret;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,6 +29,11 @@ public class TurretSpawner : MonoBehaviour
                 if (tempSpawner != null)
                 {
                     Debug.Log("Hit a Spawner");
+
+                    if (turretPlacerUI.gameObject.activeSelf == true)
+                    {
+                        turretPlacerUI.gameObject.SetActive(false);
+                    }
 
                     turretPlacerUI.gameObject.SetActive(true);
                     turretPlacerUI.ObtainTurretReference(tempSpawner);

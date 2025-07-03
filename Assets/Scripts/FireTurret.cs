@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FireTurret : MonoBehaviour
+public class FireTurret : TurretClass
 {
     [Header("Turret Properties")]
     public int cost;
@@ -20,6 +20,11 @@ public class FireTurret : MonoBehaviour
     void Start()
     {
         counter = (delayBetweenExplosions + explosionLifeTime) / 2;
+        turretCost = cost;
+        turretLevel = 1;
+        turretType = TurretType.Fire;
+
+        cost += turretCost;
     }
 
     // Update is called once per frame
@@ -41,5 +46,17 @@ public class FireTurret : MonoBehaviour
         spawnedExplosion.scaleFactor = explosionScaleFactor;
 
         counter = 0.0f;
+    }
+
+    public void LevelUp(int _supposedLevel)
+    {
+        int levelChangeChecker = (_supposedLevel <= 1) ? 0 : 1;
+
+        cost += turretCost * levelChangeChecker;
+        explosionDamage += (int)(explosionDamage / 2) * levelChangeChecker;
+        delayBetweenExplosions *= 0.75f * levelChangeChecker;
+        explosionScaleFactor += explosionScaleFactor * 0.5f * levelChangeChecker;
+
+        turretLevel = _supposedLevel;
     }
 }

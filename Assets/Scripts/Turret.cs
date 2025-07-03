@@ -1,7 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret : MonoBehaviour
+public enum TurretType
+{
+    None,
+    Normal,
+    Fire,
+    Ice
+}
+
+public class Turret : TurretClass
 {
     [Header("Turret Properties")]
     public int cost;
@@ -25,7 +33,11 @@ public class Turret : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        turretCost = cost;
+        turretLevel = 1;
+        turretType = TurretType.Normal;
+
+        cost += turretCost;
     }
 
     // Update is called once per frame
@@ -96,5 +108,16 @@ public class Turret : MonoBehaviour
         }
 
         return bestTarget;
+    }
+
+    public void LevelUp(int _supposedLevel)
+    {
+        int levelChangeChecker = (_supposedLevel <= 1) ? 0 : 1;
+
+        cost += turretCost * levelChangeChecker;
+        bulletDamage += (int)(bulletDamage / 2) * levelChangeChecker;
+        delayBetweenShots *= 0.75f * levelChangeChecker;
+
+        turretLevel = _supposedLevel;
     }
 }

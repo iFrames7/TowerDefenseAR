@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IceTurret : MonoBehaviour
+public class IceTurret : TurretClass
 {
     [Header("Turret Properties")]
     public int cost;
@@ -11,6 +11,8 @@ public class IceTurret : MonoBehaviour
     [Header("References")]
     public Transform detectionSphereCastPoint;
 
+    [HideInInspector] public TurretClass turretClass;
+
     private SphereCollider sphereCollider;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -19,6 +21,12 @@ public class IceTurret : MonoBehaviour
         sphereCollider = GetComponent<SphereCollider>();
 
         sphereCollider.radius = detectionRange;
+
+        turretCost = cost;
+        turretLevel = 1;
+        turretType = TurretType.Ice;
+
+        cost += turretCost;
     }
 
     // Update is called once per frame
@@ -45,5 +53,18 @@ public class IceTurret : MonoBehaviour
         {
             detectedEnemy.currentSpeed = detectedEnemy.speed;
         }
+    }
+
+    public void LevelUp(int _supposedLevel)
+    {
+        int levelChangeChecker = (_supposedLevel <= 1) ? 0 : 1;
+
+        cost += turretCost * levelChangeChecker;
+        detectionRange += (detectionRange / 2) * levelChangeChecker;
+        speedModifierDenominator += (speedModifierDenominator / 2) * levelChangeChecker;
+
+        sphereCollider.radius = detectionRange;
+
+        turretLevel = _supposedLevel;
     }
 }
