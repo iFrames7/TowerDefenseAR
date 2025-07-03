@@ -6,13 +6,20 @@ public class EnemyAI : MonoBehaviour
     public float speed = 3.0f;
     public float health = 100.0f;
 
+    [HideInInspector] public float currentSpeed;
+
+    private void Start()
+    {
+        currentSpeed = speed;
+    }
+
     void Update()
     {
         if (targetBase == null)
             return;
 
         Vector3 direction = (targetBase.position - transform.position).normalized;
-        transform.position += direction * speed * Time.deltaTime;
+        transform.position += direction * currentSpeed * Time.deltaTime;
     }
 
     public void TakeDamage(float damage)

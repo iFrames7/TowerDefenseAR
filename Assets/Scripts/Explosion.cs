@@ -34,9 +34,13 @@ public class Explosion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<EnemyTest>() != null)
+        EnemyAI detectedEnemy = other.GetComponent<EnemyAI>();
+
+        if (detectedEnemy != null)
         {
             Debug.Log($"Dealt {damage} points of damage via EXPLOSION");
+
+            detectedEnemy.TakeDamage(damage);
         }
     }
 }

@@ -18,9 +18,14 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<EnemyTest>() != null)
+        EnemyAI detectedEnemy = collision.gameObject.GetComponent<EnemyAI>();
+
+        if (detectedEnemy != null)
         {
             Debug.Log($"Dealt {damage} points of damage via BULLET");
+
+            detectedEnemy.TakeDamage(damage);
+
             Destroy(gameObject);
         }
     }

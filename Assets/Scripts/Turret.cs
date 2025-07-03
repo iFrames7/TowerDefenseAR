@@ -33,7 +33,7 @@ public class Turret : MonoBehaviour
     {
         Transform closestEnemy = GetClosestEnemy();
 
-        transform.LookAt(closestEnemy);
+        transform.LookAt((closestEnemy != null) ? new Vector3(closestEnemy.position.x, transform.position.y, closestEnemy.position.z) : transform.forward);
 
         shouldShoot = (closestEnemy != null) ? true : false;
 
@@ -70,19 +70,19 @@ public class Turret : MonoBehaviour
         Transform bestTarget = null;
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
-        List<EnemyTest> tempEnemies = new();
+        List<EnemyAI> tempEnemies = new();
 
         RaycastHit[] hits = Physics.SphereCastAll(currentPosition, sphereCastRadius, transform.forward, sphereCastRadius);
 
         foreach (RaycastHit hit in hits)
         {
-            if (hit.transform.gameObject.GetComponent<EnemyTest>() != null)
+            if (hit.transform.gameObject.GetComponent<EnemyAI>() != null)
             {
-                tempEnemies.Add(hit.transform.gameObject.GetComponent<EnemyTest>());
+                tempEnemies.Add(hit.transform.gameObject.GetComponent<EnemyAI>());
             }
         }
 
-        foreach (EnemyTest enemy in tempEnemies)
+        foreach (EnemyAI enemy in tempEnemies)
         {
             Vector3 directionToTarget = enemy.gameObject.transform.position - currentPosition;
 
