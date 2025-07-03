@@ -82,7 +82,7 @@ MonoBehaviour:
   explosionDamage: 80
   explosionLifeTime: 3
   explosionScaleFactor: 4
-  explosion: {fileID: 0}
+  explosion: {fileID: 279195038054202375, guid: a735e09c38a1661478289fb3223f10cd, type: 3}
   explosionPoint: {fileID: 5562514982302865693}
 --- !u!1 &5248049596388447892
 GameObject:
