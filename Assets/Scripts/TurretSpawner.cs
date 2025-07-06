@@ -11,7 +11,30 @@ public class TurretSpawner : MonoBehaviour
     {
         //turretPlacerUI = FindAnyObjectByType<TurretPlacerUI>(FindObjectsInactive.Include);
     }
-
+    public void TurretDetected()
+    {
+        foreach (Renderer renderer in GetComponentsInChildren<Renderer>())
+        { 
+            if (renderer != null)
+            { 
+                renderer.enabled = true;
+                Debug.Log("Turret detected");
+            }
+        }
+    }
+    public void TurretLost()
+    {
+        foreach (Renderer renderer in GetComponentsInChildren<Renderer>())
+        { 
+            if (renderer != null)
+            { 
+                renderer.enabled = false;
+                Debug.Log("Turret lost");
+            }
+        }
+    }
+    
+    
     // Update is called once per frame
     void Update()
     {
