@@ -11,6 +11,7 @@ public class EnemyAI : MonoBehaviour
     private void Start()
     {
         currentSpeed = speed;
+        //TakeDamage(999);
     }
 
     void Update()
@@ -33,6 +34,7 @@ public class EnemyAI : MonoBehaviour
 
     void Die()
     {
+        GameManager.Instance.AddCoins(10);
         Destroy(gameObject);
     }
 }
