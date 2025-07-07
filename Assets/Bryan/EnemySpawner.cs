@@ -72,7 +72,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        Debug.Log("Â¡Todas las oleadas completadas!");
+        Debug.Log("¡Todas las oleadas completadas!");
     }
 
     void SpawnEnemy(GameObject enemyPrefab)

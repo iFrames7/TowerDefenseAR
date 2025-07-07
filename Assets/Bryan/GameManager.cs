@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 
     public int coins = 0;
     public TMP_Text coinText;
-
+    
     private void Awake()
     {
         if (Instance == null)
@@ -22,9 +22,24 @@ public class GameManager : MonoBehaviour
         UpdateUI();
     }
 
+    public bool CobroMejoras(int _costo)
+    {
+        if (coins >= _costo)
+        {
+            coins -= _costo;
+            UpdateUI(); 
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     void UpdateUI()
     {
         if (coinText != null)
             coinText.text = "Monedas: " + coins;
+        
     }
 }

@@ -1,17 +1,22 @@
+using System;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+   
     public Transform targetBase;
     public float speed = 3.0f;
     public float health = 100.0f;
 
     [HideInInspector] public float currentSpeed;
 
+   
+
     private void Start()
     {
         currentSpeed = speed;
         //TakeDamage(999);
+        //targetBase = Base.Instance.transform;
     }
 
     void Update()
@@ -32,7 +37,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void Die()
+    public void Die()
     {
         GameManager.Instance.AddCoins(10);
         Destroy(gameObject);
