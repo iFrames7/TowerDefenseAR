@@ -1,4 +1,4 @@
-using System;
+
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,7 +41,8 @@ public class Base : MonoBehaviour
         if (enemyScript != null)
         {
             DealDamage(10);
-            Destroy(other.gameObject);
+            enemyScript.Die();
+            
         }
     }
 
@@ -54,8 +55,9 @@ public class Base : MonoBehaviour
         {
             gameOverText.gameObject.SetActive(true);
             gameOverText.text = "Game Over";
+            Time.timeScale = 0f;
             BaseLost();
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
         }
     }
     
