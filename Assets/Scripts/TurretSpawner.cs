@@ -38,28 +38,31 @@ public class TurretSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.touchCount > 0)
         {
-            Vector3 mousePosition = Input.mousePosition;
+            Touch touch = Input.GetTouch(0);
 
-            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, targetLayer))
+            if (touch.phase == TouchPhase.Began)
             {
-                TurretSpawner tempSpawner = hit.collider.gameObject.GetComponent<TurretSpawner>();
+                Ray ray = Camera.main.ScreenPointToRay(touch.position);
+                RaycastHit hit;
 
-                if (tempSpawner != null)
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, targetLayer))
                 {
-                    Debug.Log("Hit a Spawner");
+                    TurretSpawner tempSpawner = hit.collider.gameObject.GetComponent<TurretSpawner>();
 
-                    if (turretPlacerUI.gameObject.activeSelf == true)
+                    if (tempSpawner != null)
                     {
-                        turretPlacerUI.gameObject.SetActive(false);
-                    }
+                        Debug.Log("Hit a Spawner");
 
-                    turretPlacerUI.gameObject.SetActive(true);
-                    turretPlacerUI.ObtainTurretReference(tempSpawner);
+                        if (turretPlacerUI.gameObject.activeSelf == true)
+                        {
+                            turretPlacerUI.gameObject.SetActive(false);
+                        }
+
+                        turretPlacerUI.gameObject.SetActive(true);
+                        turretPlacerUI.ObtainTurretReference(tempSpawner);
+                    }
                 }
             }
         }
