@@ -77,7 +77,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1265593f290c8d94f94b83feb8a43154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 0
+  turretCost: 0
+  turretLevel: 0
+  turretType: 0
+  cost: 6
   delayBetweenExplosions: 2
   explosionDamage: 80
   explosionLifeTime: 3

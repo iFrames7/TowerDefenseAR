@@ -16,6 +16,11 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
 
+    private void Start()
+    {
+        UpdateUI();
+    }
+
     public void AddCoins(int amount)
     {
         coins += amount;
