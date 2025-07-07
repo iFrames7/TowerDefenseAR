@@ -86,8 +86,8 @@ public class Base : MonoBehaviour
             Debug.Log("Base lost");
         }
         enemySpawner1.DeactivateSpawner();
-        enemySpawner2.ActivateSpawner();
-        enemySpawner3.ActivateSpawner();
-        enemySpawner4.ActivateSpawner();
+        enemySpawner2.DeactivateSpawner();
+        enemySpawner3.DeactivateSpawner();
+        enemySpawner4.DeactivateSpawner();
     }
 }
