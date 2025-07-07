@@ -15,6 +15,7 @@ public class TurretPlacerUI : MonoBehaviour
     public Button normalTurretButton;
     public Button fireTurretButton;
     public Button iceTurretButton;
+    public GameObject notEnoughCoins;
     
     private TurretSpawner spawner;
 
@@ -26,6 +27,8 @@ public class TurretPlacerUI : MonoBehaviour
 
     public void ActivateUI()
     {
+        notEnoughCoins.SetActive(false);
+
         normalTurretButton.GetComponentInChildren<TextMeshProUGUI>().text = $"{turret.name} \nCost: {turret.cost}";
         fireTurretButton.GetComponentInChildren<TextMeshProUGUI>().text = $"{fireTurret.name} \nCost: {fireTurret.cost}";
         iceTurretButton.GetComponentInChildren<TextMeshProUGUI>().text = $"{iceTurret.name} \nCost: {iceTurret.cost}";
@@ -35,13 +38,13 @@ public class TurretPlacerUI : MonoBehaviour
             switch (spawner.spawnedTurret.turretType)
             {
                 case TurretType.Normal:
-                    normalTurretButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Lvl {spawner.spawnedTurret.turretLevel + 1} {turret.name} \nCost: {spawner.spawnedTurret.turretCost}";
+                    normalTurretButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Lvl {spawner.spawnedTurret.turretLevel + 1} {turret.name} \nCost: {spawner.spawnedTurret.GetComponent<Turret>().cost}";
                     break;
                 case TurretType.Fire:
-                    fireTurretButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Lvl {spawner.spawnedTurret.turretLevel + 1} {fireTurret.name} \nCost: {spawner.spawnedTurret.turretCost}";
+                    fireTurretButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Lvl {spawner.spawnedTurret.turretLevel + 1} {fireTurret.name} \nCost: {spawner.spawnedTurret.GetComponent<FireTurret>().cost}";
                     break;
                 case TurretType.Ice:
-                    iceTurretButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Lvl {spawner.spawnedTurret.turretLevel + 1} {iceTurret.name} \nCost: {spawner.spawnedTurret.turretCost}";
+                    iceTurretButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Lvl {spawner.spawnedTurret.turretLevel + 1} {iceTurret.name} \nCost: {spawner.spawnedTurret.GetComponent<IceTurret>().cost}";
                     break;
             }
         }
@@ -66,10 +69,22 @@ public class TurretPlacerUI : MonoBehaviour
         {
             if (spawner.spawnedTurret.turretType == TurretType.Normal)
             {
+                if (!GameManager.Instance.CobroMejoras(spawner.spawnedTurret.GetComponent<Turret>().cost))
+                {
+                    notEnoughCoins.SetActive(true);
+                    return;
+                }
+
                 spawner.spawnedTurret.GetComponent<Turret>().LevelUp(spawner.spawnedTurret.turretLevel + 1);
             }
             else
             {
+                if (!GameManager.Instance.CobroMejoras(turret.cost))
+                {
+                    notEnoughCoins.SetActive(true);
+                    return;
+                }
+
                 Destroy(spawner.spawnedTurret.gameObject);
                 spawner.spawnedTurret = null;
 
@@ -78,6 +93,12 @@ public class TurretPlacerUI : MonoBehaviour
         }
         else
         {
+            if (!GameManager.Instance.CobroMejoras(turret.cost))
+            {
+                notEnoughCoins.SetActive(true);
+                return;
+            }
+
             spawner.spawnedTurret = Instantiate(turret, spawnPosition, Quaternion.identity).gameObject.GetComponent<TurretClass>();
         }
 
@@ -92,10 +113,22 @@ public class TurretPlacerUI : MonoBehaviour
         {
             if (spawner.spawnedTurret.turretType == TurretType.Fire)
             {
+                if (!GameManager.Instance.CobroMejoras(spawner.spawnedTurret.GetComponent<FireTurret>().cost))
+                {
+                    notEnoughCoins.SetActive(true);
+                    return;
+                }
+
                 spawner.spawnedTurret.GetComponent<FireTurret>().LevelUp(spawner.spawnedTurret.turretLevel + 1);
             }
             else
             {
+                if (!GameManager.Instance.CobroMejoras(fireTurret.cost))
+                {
+                    notEnoughCoins.SetActive(true);
+                    return;
+                }
+
                 Destroy(spawner.spawnedTurret.gameObject);
                 spawner.spawnedTurret = null;
 
@@ -104,6 +137,12 @@ public class TurretPlacerUI : MonoBehaviour
         }
         else
         {
+            if (!GameManager.Instance.CobroMejoras(fireTurret.cost))
+            {
+                notEnoughCoins.SetActive(true);
+                return;
+            }
+
             spawner.spawnedTurret = Instantiate(fireTurret, spawnPosition, Quaternion.identity).gameObject.GetComponent<TurretClass>();
         }
 
@@ -118,10 +157,22 @@ public class TurretPlacerUI : MonoBehaviour
         {
             if (spawner.spawnedTurret.turretType == TurretType.Ice)
             {
+                if (!GameManager.Instance.CobroMejoras(spawner.spawnedTurret.GetComponent<IceTurret>().cost))
+                {
+                    notEnoughCoins.SetActive(true);
+                    return;
+                }
+
                 spawner.spawnedTurret.GetComponent<IceTurret>().LevelUp(spawner.spawnedTurret.turretLevel + 1);
             }
             else
             {
+                if (!GameManager.Instance.CobroMejoras(iceTurret.cost))
+                {
+                    notEnoughCoins.SetActive(true);
+                    return;
+                }
+
                 Destroy(spawner.spawnedTurret.gameObject);
                 spawner.spawnedTurret = null;
 
@@ -130,6 +181,12 @@ public class TurretPlacerUI : MonoBehaviour
         }
         else
         {
+            if (!GameManager.Instance.CobroMejoras(iceTurret.cost))
+            {
+                notEnoughCoins.SetActive(true);
+                return;
+            }
+
             spawner.spawnedTurret = Instantiate(iceTurret, spawnPosition, Quaternion.identity).gameObject.GetComponent<TurretClass>();
         }
 

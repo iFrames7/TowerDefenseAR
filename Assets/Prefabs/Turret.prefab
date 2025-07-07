@@ -296,7 +296,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d74519d1c4f1d24d887e75ff1b0e55c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 0
+  turretCost: 0
+  turretLevel: 0
+  turretType: 0
+  cost: 2
   delayBetweenShots: 2.5
   bulletForce: 30
   bulletDamage: 50
